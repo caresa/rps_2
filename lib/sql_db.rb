@@ -7,18 +7,38 @@ class RPS::SQLDB
 
       CREATE TABLE IF NOT EXISTS users (
         id integer PRIMARY KEY AUTOINCREMENT,
-        user string,
+        name string,
         password string,
         );
     SQL
 
     db.execute <<-SQL
 
-      CREATE TABLE IF NOT EXISTS text_tweets (
+      CREATE TABLE IF NOT EXISTS game (
         id integer PRIMARY KEY AUTOINCREMENT,
-        user string,
-        password string,
+        winner string,
+        name string
+        FOREIGN KEY(user_id) REFERENCES users(id)
         );
     SQL
 
+    db.execute <<-SQL
+
+      CREATE TABLE IF NOT EXISTS game (
+        id integer PRIMARY KEY AUTOINCREMENT,
+        winner string,
+        name string
+        FOREIGN KEY(user_id) REFERENCES users(id)
+        );
+    SQL
+
+    db.execute <<-SQL
+
+    CREATE TABLE IF NOT EXISTS game (
+        id integer PRIMARY KEY AUTOINCREMENT,
+        winner string,
+        name string
+        FOREIGN KEY(user_id) REFERENCES users(id)
+        );
+    SQL
 end
