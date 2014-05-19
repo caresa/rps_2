@@ -24,10 +24,10 @@ class RPS::SQLDB
 
     db.execute <<-SQL
 
-      CREATE TABLE IF NOT EXISTS game (
+      CREATE TABLE IF NOT EXISTS round (
         id integer PRIMARY KEY AUTOINCREMENT,
-        winner string,
-        name string
+        move1 string,
+        move2 string
         FOREIGN KEY(user_id) REFERENCES users(id)
         );
     SQL
@@ -42,3 +42,20 @@ class RPS::SQLDB
         );
     SQL
 end
+
+
+  def build_user(data)
+    RPS::Users.new(data[:name], data[:id], data[:password])
+  end
+
+  def create_user(data)
+    INSERT INTO users(data[:name], data[:id], data[:password])
+    VALUES("#{data[:name]} #{data[:id]} #{data[:password]}")
+    build_user(data)
+  end
+
+  def get_user(id)
+
+  end
+
+
